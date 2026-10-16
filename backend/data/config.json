@@ -1,0 +1,668 @@
+{
+  "academic_year": "2026-2027",
+  "semester": "Semester 5",
+  "department": "Computer Science & Engineering",
+  "working_days": [
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday"
+  ],
+  "time_slots": [
+    {
+      "slot_index": 0,
+      "label": "09:00 - 10:00",
+      "start_time": "09:00",
+      "end_time": "10:00",
+      "is_break": false,
+      "break_name": null
+    },
+    {
+      "slot_index": 1,
+      "label": "10:00 - 11:00",
+      "start_time": "10:00",
+      "end_time": "11:00",
+      "is_break": false,
+      "break_name": null
+    },
+    {
+      "slot_index": 2,
+      "label": "11:00 - 12:00",
+      "start_time": "11:00",
+      "end_time": "12:00",
+      "is_break": false,
+      "break_name": null
+    },
+    {
+      "slot_index": 3,
+      "label": "12:00 - 13:00",
+      "start_time": "12:00",
+      "end_time": "13:00",
+      "is_break": false,
+      "break_name": null
+    },
+    {
+      "slot_index": 4,
+      "label": "13:00 - 14:00",
+      "start_time": "13:00",
+      "end_time": "14:00",
+      "is_break": true,
+      "break_name": "Lunch Break"
+    },
+    {
+      "slot_index": 5,
+      "label": "14:00 - 15:00",
+      "start_time": "14:00",
+      "end_time": "15:00",
+      "is_break": false,
+      "break_name": null
+    },
+    {
+      "slot_index": 6,
+      "label": "15:00 - 16:00",
+      "start_time": "15:00",
+      "end_time": "16:00",
+      "is_break": false,
+      "break_name": null
+    },
+    {
+      "slot_index": 7,
+      "label": "16:00 - 17:00",
+      "start_time": "16:00",
+      "end_time": "17:00",
+      "is_break": false,
+      "break_name": null
+    }
+  ],
+  "divisions": [
+    {
+      "id": "DIV_A",
+      "name": "Computer Science - Division A",
+      "student_strength": 55,
+      "department": "Computer Science & Engineering",
+      "blocked_slots": [
+        {
+          "day": "Wednesday",
+          "slot_index": 7
+        }
+      ]
+    },
+    {
+      "id": "DIV_B",
+      "name": "Computer Science - Division B",
+      "student_strength": 50,
+      "department": "Computer Science & Engineering",
+      "blocked_slots": [
+        {
+          "day": "Friday",
+          "slot_index": 7
+        }
+      ]
+    }
+  ],
+  "subjects": [
+    {
+      "id": "SUB_CS501",
+      "code": "CS501",
+      "name": "Operating Systems",
+      "department": "CSE",
+      "preferred_room_types": [
+        "classroom"
+      ]
+    },
+    {
+      "id": "SUB_CS502",
+      "code": "CS502",
+      "name": "Database Management Systems",
+      "department": "CSE",
+      "preferred_room_types": [
+        "classroom"
+      ]
+    },
+    {
+      "id": "SUB_CS503",
+      "code": "CS503",
+      "name": "Computer Networks",
+      "department": "CSE",
+      "preferred_room_types": [
+        "classroom"
+      ]
+    },
+    {
+      "id": "SUB_CS504",
+      "code": "CS504",
+      "name": "Artificial Intelligence & ML",
+      "department": "CSE",
+      "preferred_room_types": [
+        "classroom"
+      ]
+    },
+    {
+      "id": "SUB_CS505",
+      "code": "CS505",
+      "name": "Software Engineering",
+      "department": "CSE",
+      "preferred_room_types": [
+        "classroom"
+      ]
+    }
+  ],
+  "requirements": [
+    {
+      "id": "REQ_A_CS501_TH",
+      "subject_id": "SUB_CS501",
+      "division_id": "DIV_A",
+      "session_type": "theory",
+      "weekly_count": 3,
+      "duration_slots": 1,
+      "preferred_faculty_ids": [
+        "FAC_ALAN"
+      ],
+      "requires_lab": false,
+      "required_equipment": []
+    },
+    {
+      "id": "REQ_A_CS501_PR",
+      "subject_id": "SUB_CS501",
+      "division_id": "DIV_A",
+      "session_type": "practical",
+      "weekly_count": 1,
+      "duration_slots": 2,
+      "preferred_faculty_ids": [],
+      "requires_lab": true,
+      "required_equipment": [
+        "Linux Workstations"
+      ]
+    },
+    {
+      "id": "REQ_A_CS502_TH",
+      "subject_id": "SUB_CS502",
+      "division_id": "DIV_A",
+      "session_type": "theory",
+      "weekly_count": 3,
+      "duration_slots": 1,
+      "preferred_faculty_ids": [
+        "FAC_CODD"
+      ],
+      "requires_lab": false,
+      "required_equipment": []
+    },
+    {
+      "id": "REQ_A_CS502_PR",
+      "subject_id": "SUB_CS502",
+      "division_id": "DIV_A",
+      "session_type": "practical",
+      "weekly_count": 1,
+      "duration_slots": 2,
+      "preferred_faculty_ids": [],
+      "requires_lab": true,
+      "required_equipment": [
+        "Database Workstations"
+      ]
+    },
+    {
+      "id": "REQ_A_CS503_TH",
+      "subject_id": "SUB_CS503",
+      "division_id": "DIV_A",
+      "session_type": "theory",
+      "weekly_count": 3,
+      "duration_slots": 1,
+      "preferred_faculty_ids": [
+        "FAC_SHANNON"
+      ],
+      "requires_lab": false,
+      "required_equipment": []
+    },
+    {
+      "id": "REQ_A_CS503_PR",
+      "subject_id": "SUB_CS503",
+      "division_id": "DIV_A",
+      "session_type": "practical",
+      "weekly_count": 1,
+      "duration_slots": 2,
+      "preferred_faculty_ids": [],
+      "requires_lab": true,
+      "required_equipment": [
+        "Network Simulator"
+      ]
+    },
+    {
+      "id": "REQ_A_CS504_TH",
+      "subject_id": "SUB_CS504",
+      "division_id": "DIV_A",
+      "session_type": "theory",
+      "weekly_count": 3,
+      "duration_slots": 1,
+      "preferred_faculty_ids": [
+        "FAC_MCCARTHY"
+      ],
+      "requires_lab": false,
+      "required_equipment": []
+    },
+    {
+      "id": "REQ_A_CS504_PR",
+      "subject_id": "SUB_CS504",
+      "division_id": "DIV_A",
+      "session_type": "practical",
+      "weekly_count": 1,
+      "duration_slots": 2,
+      "preferred_faculty_ids": [],
+      "requires_lab": true,
+      "required_equipment": [
+        "GPU Nodes"
+      ]
+    },
+    {
+      "id": "REQ_A_CS505_TH",
+      "subject_id": "SUB_CS505",
+      "division_id": "DIV_A",
+      "session_type": "theory",
+      "weekly_count": 3,
+      "duration_slots": 1,
+      "preferred_faculty_ids": [
+        "FAC_ADA"
+      ],
+      "requires_lab": false,
+      "required_equipment": []
+    },
+    {
+      "id": "REQ_B_CS501_TH",
+      "subject_id": "SUB_CS501",
+      "division_id": "DIV_B",
+      "session_type": "theory",
+      "weekly_count": 3,
+      "duration_slots": 1,
+      "preferred_faculty_ids": [
+        "FAC_GRACE"
+      ],
+      "requires_lab": false,
+      "required_equipment": []
+    },
+    {
+      "id": "REQ_B_CS501_PR",
+      "subject_id": "SUB_CS501",
+      "division_id": "DIV_B",
+      "session_type": "practical",
+      "weekly_count": 1,
+      "duration_slots": 2,
+      "preferred_faculty_ids": [],
+      "requires_lab": true,
+      "required_equipment": [
+        "Linux Workstations"
+      ]
+    },
+    {
+      "id": "REQ_B_CS502_TH",
+      "subject_id": "SUB_CS502",
+      "division_id": "DIV_B",
+      "session_type": "theory",
+      "weekly_count": 3,
+      "duration_slots": 1,
+      "preferred_faculty_ids": [
+        "FAC_CODD"
+      ],
+      "requires_lab": false,
+      "required_equipment": []
+    },
+    {
+      "id": "REQ_B_CS502_PR",
+      "subject_id": "SUB_CS502",
+      "division_id": "DIV_B",
+      "session_type": "practical",
+      "weekly_count": 1,
+      "duration_slots": 2,
+      "preferred_faculty_ids": [],
+      "requires_lab": true,
+      "required_equipment": [
+        "Database Workstations"
+      ]
+    },
+    {
+      "id": "REQ_B_CS503_TH",
+      "subject_id": "SUB_CS503",
+      "division_id": "DIV_B",
+      "session_type": "theory",
+      "weekly_count": 3,
+      "duration_slots": 1,
+      "preferred_faculty_ids": [
+        "FAC_SHANNON"
+      ],
+      "requires_lab": false,
+      "required_equipment": []
+    },
+    {
+      "id": "REQ_B_CS503_PR",
+      "subject_id": "SUB_CS503",
+      "division_id": "DIV_B",
+      "session_type": "practical",
+      "weekly_count": 1,
+      "duration_slots": 2,
+      "preferred_faculty_ids": [],
+      "requires_lab": true,
+      "required_equipment": [
+        "Network Simulator"
+      ]
+    },
+    {
+      "id": "REQ_B_CS504_TH",
+      "subject_id": "SUB_CS504",
+      "division_id": "DIV_B",
+      "session_type": "theory",
+      "weekly_count": 3,
+      "duration_slots": 1,
+      "preferred_faculty_ids": [
+        "FAC_MCCARTHY"
+      ],
+      "requires_lab": false,
+      "required_equipment": []
+    },
+    {
+      "id": "REQ_B_CS504_PR",
+      "subject_id": "SUB_CS504",
+      "division_id": "DIV_B",
+      "session_type": "practical",
+      "weekly_count": 1,
+      "duration_slots": 2,
+      "preferred_faculty_ids": [],
+      "requires_lab": true,
+      "required_equipment": [
+        "GPU Nodes"
+      ]
+    },
+    {
+      "id": "REQ_B_CS505_TH",
+      "subject_id": "SUB_CS505",
+      "division_id": "DIV_B",
+      "session_type": "theory",
+      "weekly_count": 3,
+      "duration_slots": 1,
+      "preferred_faculty_ids": [
+        "FAC_ADA"
+      ],
+      "requires_lab": false,
+      "required_equipment": []
+    }
+  ],
+  "faculty": [
+    {
+      "id": "FAC_ALAN",
+      "name": "Dr. Alan Turing",
+      "email": "alan.turing@campusflow.edu",
+      "department": "CSE",
+      "qualified_subject_ids": [
+        "SUB_CS501",
+        "SUB_CS503"
+      ],
+      "qualified_session_types": [
+        "theory",
+        "practical"
+      ],
+      "max_daily_sessions": 4,
+      "max_weekly_sessions": 14,
+      "max_consecutive_sessions": 3,
+      "unavailable_slots": [
+        {
+          "day": "Friday",
+          "slot_index": 6
+        },
+        {
+          "day": "Friday",
+          "slot_index": 7
+        }
+      ],
+      "preferred_slots": [
+        {
+          "day": "Monday",
+          "slot_index": 0
+        },
+        {
+          "day": "Tuesday",
+          "slot_index": 0
+        }
+      ]
+    },
+    {
+      "id": "FAC_CODD",
+      "name": "Dr. Edgar F. Codd",
+      "email": "edgar.codd@campusflow.edu",
+      "department": "CSE",
+      "qualified_subject_ids": [
+        "SUB_CS502"
+      ],
+      "qualified_session_types": [
+        "theory",
+        "practical"
+      ],
+      "max_daily_sessions": 4,
+      "max_weekly_sessions": 14,
+      "max_consecutive_sessions": 3,
+      "unavailable_slots": [
+        {
+          "day": "Wednesday",
+          "slot_index": 0
+        }
+      ],
+      "preferred_slots": [
+        {
+          "day": "Tuesday",
+          "slot_index": 1
+        },
+        {
+          "day": "Thursday",
+          "slot_index": 1
+        }
+      ]
+    },
+    {
+      "id": "FAC_ADA",
+      "name": "Dr. Ada Lovelace",
+      "email": "ada.lovelace@campusflow.edu",
+      "department": "CSE",
+      "qualified_subject_ids": [
+        "SUB_CS505",
+        "SUB_CS504"
+      ],
+      "qualified_session_types": [
+        "theory",
+        "practical",
+        "tutorial"
+      ],
+      "max_daily_sessions": 4,
+      "max_weekly_sessions": 14,
+      "max_consecutive_sessions": 3,
+      "unavailable_slots": [],
+      "preferred_slots": [
+        {
+          "day": "Monday",
+          "slot_index": 1
+        },
+        {
+          "day": "Wednesday",
+          "slot_index": 1
+        }
+      ]
+    },
+    {
+      "id": "FAC_SHANNON",
+      "name": "Dr. Claude Shannon",
+      "email": "claude.shannon@campusflow.edu",
+      "department": "CSE",
+      "qualified_subject_ids": [
+        "SUB_CS503"
+      ],
+      "qualified_session_types": [
+        "theory",
+        "practical"
+      ],
+      "max_daily_sessions": 4,
+      "max_weekly_sessions": 14,
+      "max_consecutive_sessions": 3,
+      "unavailable_slots": [
+        {
+          "day": "Thursday",
+          "slot_index": 6
+        },
+        {
+          "day": "Thursday",
+          "slot_index": 7
+        }
+      ],
+      "preferred_slots": [
+        {
+          "day": "Monday",
+          "slot_index": 2
+        },
+        {
+          "day": "Wednesday",
+          "slot_index": 2
+        }
+      ]
+    },
+    {
+      "id": "FAC_MCCARTHY",
+      "name": "Dr. John McCarthy",
+      "email": "john.mccarthy@campusflow.edu",
+      "department": "CSE",
+      "qualified_subject_ids": [
+        "SUB_CS504"
+      ],
+      "qualified_session_types": [
+        "theory",
+        "practical"
+      ],
+      "max_daily_sessions": 4,
+      "max_weekly_sessions": 14,
+      "max_consecutive_sessions": 3,
+      "unavailable_slots": [],
+      "preferred_slots": [
+        {
+          "day": "Tuesday",
+          "slot_index": 2
+        },
+        {
+          "day": "Thursday",
+          "slot_index": 2
+        }
+      ]
+    },
+    {
+      "id": "FAC_GRACE",
+      "name": "Prof. Grace Hopper",
+      "email": "grace.hopper@campusflow.edu",
+      "department": "CSE",
+      "qualified_subject_ids": [
+        "SUB_CS501",
+        "SUB_CS502",
+        "SUB_CS505"
+      ],
+      "qualified_session_types": [
+        "theory",
+        "practical"
+      ],
+      "max_daily_sessions": 4,
+      "max_weekly_sessions": 14,
+      "max_consecutive_sessions": 3,
+      "unavailable_slots": [
+        {
+          "day": "Monday",
+          "slot_index": 7
+        }
+      ],
+      "preferred_slots": [
+        {
+          "day": "Tuesday",
+          "slot_index": 3
+        },
+        {
+          "day": "Friday",
+          "slot_index": 1
+        }
+      ]
+    }
+  ],
+  "rooms": [
+    {
+      "id": "ROOM_301",
+      "name": "Room 301 (Classroom A)",
+      "room_type": "classroom",
+      "capacity": 65,
+      "equipment": [
+        "Projector",
+        "Whiteboard",
+        "Audio System"
+      ],
+      "unavailable_slots": []
+    },
+    {
+      "id": "ROOM_302",
+      "name": "Room 302 (Classroom B)",
+      "room_type": "classroom",
+      "capacity": 65,
+      "equipment": [
+        "Projector",
+        "Whiteboard",
+        "Smart Board"
+      ],
+      "unavailable_slots": []
+    },
+    {
+      "id": "LAB_1",
+      "name": "Lab 101 - Systems & Network Lab",
+      "room_type": "lab",
+      "capacity": 60,
+      "equipment": [
+        "Projector",
+        "Linux Workstations",
+        "Network Simulator",
+        "Whiteboard"
+      ],
+      "unavailable_slots": [
+        {
+          "day": "Monday",
+          "slot_index": 0
+        }
+      ]
+    },
+    {
+      "id": "LAB_2",
+      "name": "Lab 102 - AI & Database Lab",
+      "room_type": "lab",
+      "capacity": 60,
+      "equipment": [
+        "Projector",
+        "Database Workstations",
+        "GPU Nodes",
+        "Whiteboard"
+      ],
+      "unavailable_slots": [
+        {
+          "day": "Wednesday",
+          "slot_index": 0
+        }
+      ]
+    },
+    {
+      "id": "SEMINAR_HALL",
+      "name": "Seminar Hall 1",
+      "room_type": "seminar_hall",
+      "capacity": 120,
+      "equipment": [
+        "Projector",
+        "Audio System",
+        "Stage"
+      ],
+      "unavailable_slots": []
+    }
+  ],
+  "solver_time_limit": 15.0,
+  "allow_partial": true,
+  "weights": {
+    "gap_weight": 4,
+    "workload_balance_weight": 3,
+    "subject_spread_weight": 5,
+    "consecutive_penalty_weight": 2,
+    "preference_weight": 2,
+    "room_efficiency_weight": 1
+  }
+}
