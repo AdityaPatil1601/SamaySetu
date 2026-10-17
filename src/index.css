@@ -1,0 +1,91 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    /* Palette specified by Hackathon design criteria */
+    --ivory-warm: #F6F1E8;
+    --forest-green: #244B3B;
+    --forest-dark: #1A372B;
+    --forest-light: #2D5E4A;
+    --forest-subtle: #EDF3F0;
+    --terracotta: #C66A4A;
+    --terracotta-dark: #A95437;
+    --terracotta-subtle: #FDF3EF;
+    --soft-sand: #E2D5B8;
+    --sand-subtle: #F0E9D9;
+    --charcoal: #22252A;
+    --charcoal-muted: #535965;
+    --charcoal-border: #D8CEBA;
+    --font-heading: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+
+  body {
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    letter-spacing: -0.012em;
+    background-color: var(--ivory-warm);
+    color: var(--charcoal);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  .font-mono {
+    font-family: 'JetBrains Mono', monospace;
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/* Palette utility classes */
+.bg-ivory { background-color: #F6F1E8; }
+.bg-forest { background-color: #244B3B; }
+.bg-forest-light { background-color: #2D5E4A; }
+.bg-forest-subtle { background-color: #EDF3F0; }
+.bg-terracotta { background-color: #C66A4A; }
+.bg-terracotta-subtle { background-color: #FDF3EF; }
+.bg-sand { background-color: #E2D5B8; }
+.bg-sand-subtle { background-color: #F0E9D9; }
+
+.text-forest { color: #244B3B; }
+.text-terracotta { color: #C66A4A; }
+.text-charcoal { color: #22252A; }
+.text-charcoal-muted { color: #535965; }
+
+.border-sand { border-color: #E2D5B8; }
+.border-sand-subtle { border-color: #EDE4D1; }
+.border-forest { border-color: #244B3B; }
+.border-terracotta { border-color: #C66A4A; }
+
+/* Academic elevation & card containers */
+.academic-card {
+  background-color: #FFFFFF;
+  border: 1px solid #E2D5B8;
+  border-radius: 14px;
+  box-shadow: 0 1px 3px rgba(36, 75, 59, 0.04);
+}
+
+.academic-card-lift {
+  transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.18s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.18s ease;
+}
+.academic-card-lift:hover {
+  transform: translateY(-2px);
+  border-color: #C66A4A;
+  box-shadow: 0 8px 20px -4px rgba(36, 75, 59, 0.08);
+}
+
+/* Professional high-contrast timetable scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F6F1E8;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #D8CEBA;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #244B3B;
+}
