@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # 🏛️ SamaySetu (समयसेतु)
 ### Autonomous Institutional Timetable Orchestration & Academic Operations Suite
 
@@ -137,4 +137,4 @@ Developed for the Institutional Academic Timetable Optimization Challenge.
 =======
 # SamaySetu
 Smart Campus Timetable Optimizer with conflict detection and management
->>>>>>> origin/main
+
