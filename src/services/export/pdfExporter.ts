@@ -28,16 +28,16 @@ function hexToRgb(hex: string): [number, number, number] {
   return [(num >> 16) & 255, (num >> 8) & 255, num & 255];
 }
 
-// Map subject code to pastel fill colors
+// Map subject code to harmonious palette tints (Forest Green, Terracotta, Soft Sand, Warm Ivory)
 const SUBJECT_PASTEL_COLORS: Record<string, [number, number, number]> = {
-  CS101: [238, 242, 255], // Indigo
-  IT301: [240, 253, 244], // Emerald
-  MA101: [254, 243, 199], // Amber
-  CS202: [243, 232, 255], // Purple
-  IT302: [224, 242, 254], // Sky
-  IT101: [252, 231, 243], // Pink
-  EC201: [255, 237, 213], // Orange
-  ME201: [204, 251, 241], // Teal
+  CS101: [237, 243, 240], // Forest Green tint
+  IT301: [253, 243, 239], // Terracotta tint
+  MA101: [246, 241, 232], // Warm Ivory
+  CS202: [226, 213, 184], // Soft Sand tint
+  IT302: [237, 243, 240], // Forest Green tint
+  IT101: [253, 243, 239], // Terracotta tint
+  EC201: [240, 233, 217], // Sand subtle
+  ME201: [237, 243, 240], // Forest Green tint
 };
 
 export function generateSingleTimetablePage(

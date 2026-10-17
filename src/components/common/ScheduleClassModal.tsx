@@ -7,10 +7,8 @@ import {
   AlertCircle,
   CheckCircle2,
   Calendar,
-  Sparkles,
   BookOpen,
   ArrowRight,
-  ShieldAlert,
   Info,
 } from 'lucide-react';
 import { Modal } from './Modal';
@@ -52,7 +50,7 @@ export const ScheduleClassModal: React.FC<ScheduleClassModalProps> = ({
   settings,
   onScheduleConfirmed,
 }) => {
-  // Step 1: Find all subjects taught by this professor (or where eligible)
+  // Step 1: Subjects taught by this professor (or where eligible)
   const mySubjects = useMemo(() => {
     return subjects.filter(
       s =>
@@ -61,9 +59,8 @@ export const ScheduleClassModal: React.FC<ScheduleClassModalProps> = ({
     );
   }, [subjects, currentFaculty]);
 
-  // Step 2: Find all classes (divisions) that this professor teaches
+  // Step 2: Classes (divisions) that this professor teaches
   const eligibleDivisions = useMemo(() => {
-    // Divisions from subjects taught by faculty
     const divIdSet = new Set<string>();
     mySubjects.forEach(s => {
       s.divisionIds.forEach(id => divIdSet.add(id));
@@ -72,7 +69,6 @@ export const ScheduleClassModal: React.FC<ScheduleClassModalProps> = ({
       }
     });
 
-    // Also include any assignments already in activeVersion for this faculty
     if (activeVersion) {
       activeVersion.assignments
         .filter(a => a.facultyId === currentFaculty.id)
@@ -88,14 +84,12 @@ export const ScheduleClassModal: React.FC<ScheduleClassModalProps> = ({
     return eligibleDivisions[0]?.id || divisions[0]?.id || '';
   });
 
-  // Keep selected division updated if eligibleDivisions changes
   React.useEffect(() => {
     if (eligibleDivisions.length > 0 && !eligibleDivisions.some(d => d.id === selectedDivisionId)) {
       setSelectedDivisionId(eligibleDivisions[0].id);
     }
   }, [eligibleDivisions, selectedDivisionId]);
 
-  // Selected class division object
   const selectedDivision = useMemo(() => {
     return divisions.find(d => d.id === selectedDivisionId) || eligibleDivisions[0] || divisions[0];
   }, [divisions, eligibleDivisions, selectedDivisionId]);
@@ -120,11 +114,9 @@ export const ScheduleClassModal: React.FC<ScheduleClassModalProps> = ({
     return subjects.find(s => s.id === selectedSubjectId) || subjectsForClass[0] || subjects[0];
   }, [subjects, subjectsForClass, selectedSubjectId]);
 
-  // Session type: Theory or Practical
   const [sessionType, setSessionType] = useState<'Theory' | 'Practical'>('Theory');
   const [reason, setReason] = useState<string>('Compensatory Lecture for missed session');
 
-  // Room selection: default to first available permitted room
   const permittedRooms = useMemo(() => {
     if (selectedSubject?.permittedRoomIds?.length) {
       const filtered = rooms.filter(r => selectedSubject.permittedRoomIds.includes(r.id));
@@ -141,7 +133,6 @@ export const ScheduleClassModal: React.FC<ScheduleClassModalProps> = ({
     }
   }, [permittedRooms, selectedRoomId]);
 
-  // Selected slot coordinates: { day: DayOfWeek, slotIndex: number } | null
   const [selectedSlot, setSelectedSlot] = useState<{ day: DayOfWeek; slotIndex: number } | null>(null);
 
   // Timetable Analysis for the chosen class
@@ -162,11 +153,9 @@ export const ScheduleClassModal: React.FC<ScheduleClassModalProps> = ({
     return activeVersion.assignments.filter(a => a.roomId === selectedRoomId);
   }, [activeVersion, selectedRoomId]);
 
-  // Slots calculation
   const workingDays = settings.workingDays;
   const timeSlots = settings.slots.filter(s => !s.isBreak);
 
-  // Helper to determine slot status for the grid
   interface SlotEvaluation {
     type: 'available' | 'prof_busy' | 'class_busy' | 'both_busy' | 'room_busy';
     classAssignment?: ScheduleAssignment;
@@ -187,7 +176,6 @@ export const ScheduleClassModal: React.FC<ScheduleClassModalProps> = ({
       a => a.day === day && slotIndex >= a.startSlotIndex && slotIndex < a.startSlotIndex + a.durationSlots
     );
 
-    // If both class and professor are busy
     if (classAsg && profAsg) {
       return {
         type: 'both_busy',
@@ -198,7 +186,6 @@ export const ScheduleClassModal: React.FC<ScheduleClassModalProps> = ({
       };
     }
 
-    // If class has a lecture scheduled
     if (classAsg) {
       return {
         type: 'class_busy',
@@ -208,17 +195,15 @@ export const ScheduleClassModal: React.FC<ScheduleClassModalProps> = ({
       };
     }
 
-    // If class is free, but professor has another lecture elsewhere
     if (profAsg) {
       return {
         type: 'prof_busy',
         profAssignment: profAsg,
-        label: 'You are Unavailable',
+        label: "You're Unavailable",
         description: `You have ${profAsg.subjectCode} in ${profAsg.divisionName} (${profAsg.roomNumber})`,
       };
     }
 
-    // If room is busy at this slot
     if (roomAsg) {
       return {
         type: 'room_busy',
@@ -228,7 +213,6 @@ export const ScheduleClassModal: React.FC<ScheduleClassModalProps> = ({
       };
     }
 
-    // Free and eligible!
     return {
       type: 'available',
       label: 'Open & Available',
@@ -268,7 +252,7 @@ export const ScheduleClassModal: React.FC<ScheduleClassModalProps> = ({
     const newAnnouncement: Announcement = {
       id: `ann-sched-${Date.now()}`,
       title: `Compensatory Lecture: ${selectedSubject.name} (${selectedSubject.code})`,
-      content: `Notice for ${selectedDivision.name}: ${currentFaculty.name} has scheduled a ${sessionType.toLowerCase()} session on ${selectedSlot.day} during period ${slotConfig.label} in ${roomObj.roomNumber} (${roomObj.name}). Reason: ${reason}. Please attend promptly.`,
+      content: `Notice for ${selectedDivision.name}: ${currentFaculty.name} has scheduled a compensatory ${sessionType.toLowerCase()} session on ${selectedSlot.day} during period ${slotConfig.label} in ${roomObj.roomNumber} (${roomObj.name}). Reason: ${reason}. Please attend promptly.`,
       authorName: currentFaculty.name,
       authorRole: 'teacher',
       targetAudience: 'class',
@@ -286,16 +270,16 @@ export const ScheduleClassModal: React.FC<ScheduleClassModalProps> = ({
       isOpen={isOpen}
       onClose={onClose}
       title="Schedule a Compensatory Class"
-      subtitle="Select your target class, inspect student & faculty time matrix, and book a verified conflict-free slot."
+      subtitle="Select a class you teach, inspect conflict evaluation, and confirm a verified free slot."
       maxWidth="5xl"
     >
-      <div className="p-5 sm:p-6 space-y-6 text-slate-800 dark:text-slate-200">
-        {/* Step 1: Class, Course, Type & Room Selector Strip */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 p-4 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/60 shadow-xs">
+      <div className="p-5 sm:p-6 space-y-6 text-[#22252A]">
+        {/* Step 1: Controls Strip */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 p-4 rounded-xl bg-[#F6F1E8] border border-[#E2D5B8]">
           {/* Target Class Dropdown */}
           <div className="space-y-1">
-            <label className="text-[11px] font-bold uppercase tracking-wider text-slate-600 dark:text-slate-400 flex items-center gap-1.5">
-              <Users className="w-3.5 h-3.5 text-blue-600" />
+            <label className="text-[11px] font-bold uppercase tracking-wider text-[#244B3B] flex items-center gap-1.5">
+              <Users className="w-3.5 h-3.5" />
               <span>1. Target Class</span>
             </label>
             <select
@@ -304,7 +288,7 @@ export const ScheduleClassModal: React.FC<ScheduleClassModalProps> = ({
                 setSelectedDivisionId(e.target.value);
                 setSelectedSlot(null);
               }}
-              className="w-full text-xs font-semibold px-3 py-2 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-lg text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors"
+              className="w-full text-xs font-semibold px-3 py-2 bg-white border border-[#D8CEBA] rounded-lg text-[#22252A] focus:outline-none focus:ring-2 focus:ring-[#244B3B]"
             >
               {eligibleDivisions.map(d => (
                 <option key={d.id} value={d.id}>
@@ -314,10 +298,10 @@ export const ScheduleClassModal: React.FC<ScheduleClassModalProps> = ({
             </select>
           </div>
 
-          {/* Subject / Course Dropdown */}
+          {/* Subject Dropdown */}
           <div className="space-y-1">
-            <label className="text-[11px] font-bold uppercase tracking-wider text-slate-600 dark:text-slate-400 flex items-center gap-1.5">
-              <BookOpen className="w-3.5 h-3.5 text-blue-600" />
+            <label className="text-[11px] font-bold uppercase tracking-wider text-[#244B3B] flex items-center gap-1.5">
+              <BookOpen className="w-3.5 h-3.5" />
               <span>2. Subject</span>
             </label>
             <select
@@ -326,7 +310,7 @@ export const ScheduleClassModal: React.FC<ScheduleClassModalProps> = ({
                 setSelectedSubjectId(e.target.value);
                 setSelectedSlot(null);
               }}
-              className="w-full text-xs font-semibold px-3 py-2 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-lg text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors"
+              className="w-full text-xs font-semibold px-3 py-2 bg-white border border-[#D8CEBA] rounded-lg text-[#22252A] focus:outline-none focus:ring-2 focus:ring-[#244B3B]"
             >
               {subjectsForClass.map(s => (
                 <option key={s.id} value={s.id}>
@@ -336,20 +320,20 @@ export const ScheduleClassModal: React.FC<ScheduleClassModalProps> = ({
             </select>
           </div>
 
-          {/* Session Type */}
+          {/* Format */}
           <div className="space-y-1">
-            <label className="text-[11px] font-bold uppercase tracking-wider text-slate-600 dark:text-slate-400 flex items-center gap-1.5">
-              <Clock className="w-3.5 h-3.5 text-blue-600" />
-              <span>3. Session Format</span>
+            <label className="text-[11px] font-bold uppercase tracking-wider text-[#244B3B] flex items-center gap-1.5">
+              <Clock className="w-3.5 h-3.5" />
+              <span>3. Format</span>
             </label>
-            <div className="grid grid-cols-2 gap-1.5 p-1 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-lg">
+            <div className="grid grid-cols-2 gap-1.5 p-1 bg-white border border-[#D8CEBA] rounded-lg">
               <button
                 type="button"
                 onClick={() => setSessionType('Theory')}
-                className={`py-1 text-xs font-medium rounded-md transition-all ${
+                className={`py-1 text-xs rounded-md transition-all ${
                   sessionType === 'Theory'
-                    ? 'bg-blue-600 text-white font-semibold shadow-xs'
-                    : 'text-slate-600 dark:text-slate-400 hover:text-slate-900'
+                    ? 'bg-[#244B3B] text-white font-bold shadow-xs'
+                    : 'text-[#535965] hover:text-[#22252A]'
                 }`}
               >
                 Theory (1 hr)
@@ -357,10 +341,10 @@ export const ScheduleClassModal: React.FC<ScheduleClassModalProps> = ({
               <button
                 type="button"
                 onClick={() => setSessionType('Practical')}
-                className={`py-1 text-xs font-medium rounded-md transition-all ${
+                className={`py-1 text-xs rounded-md transition-all ${
                   sessionType === 'Practical'
-                    ? 'bg-blue-600 text-white font-semibold shadow-xs'
-                    : 'text-slate-600 dark:text-slate-400 hover:text-slate-900'
+                    ? 'bg-[#244B3B] text-white font-bold shadow-xs'
+                    : 'text-[#535965] hover:text-[#22252A]'
                 }`}
               >
                 Practical (2 hr)
@@ -370,14 +354,14 @@ export const ScheduleClassModal: React.FC<ScheduleClassModalProps> = ({
 
           {/* Room Allocation */}
           <div className="space-y-1">
-            <label className="text-[11px] font-bold uppercase tracking-wider text-slate-600 dark:text-slate-400 flex items-center gap-1.5">
-              <DoorOpen className="w-3.5 h-3.5 text-blue-600" />
+            <label className="text-[11px] font-bold uppercase tracking-wider text-[#244B3B] flex items-center gap-1.5">
+              <DoorOpen className="w-3.5 h-3.5" />
               <span>4. Classroom / Lab</span>
             </label>
             <select
               value={selectedRoomId}
               onChange={e => setSelectedRoomId(e.target.value)}
-              className="w-full text-xs font-semibold px-3 py-2 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-lg text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors"
+              className="w-full text-xs font-semibold px-3 py-2 bg-white border border-[#D8CEBA] rounded-lg text-[#22252A] focus:outline-none focus:ring-2 focus:ring-[#244B3B]"
             >
               {permittedRooms.map(r => (
                 <option key={r.id} value={r.id}>
@@ -388,73 +372,73 @@ export const ScheduleClassModal: React.FC<ScheduleClassModalProps> = ({
           </div>
         </div>
 
-        {/* Reason / Notes Field */}
-        <div className="flex items-center gap-3 px-3 py-2 bg-blue-50/60 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-900/60 rounded-xl">
-          <Info className="w-4 h-4 text-blue-700 dark:text-blue-400 shrink-0" />
+        {/* Reason / Notes */}
+        <div className="flex items-center gap-3 px-3 py-2 bg-[#F6F1E8] border border-[#E2D5B8] rounded-xl">
+          <Info className="w-4 h-4 text-[#244B3B] shrink-0" />
           <div className="flex-1 flex flex-col sm:flex-row sm:items-center gap-2">
-            <span className="text-xs font-semibold text-blue-950 dark:text-blue-200 whitespace-nowrap">
+            <span className="text-xs font-bold text-[#244B3B] whitespace-nowrap">
               Reason for scheduling:
             </span>
             <input
               type="text"
               value={reason}
               onChange={e => setReason(e.target.value)}
-              placeholder="e.g. Compensating for missed lecture due to department symposium"
-              className="flex-1 text-xs px-2.5 py-1 bg-white dark:bg-slate-900 border border-blue-200 dark:border-blue-800 rounded-md text-slate-800 dark:text-slate-200 focus:outline-none focus:ring-1 focus:ring-blue-500"
+              placeholder="e.g. Compensating for missed lecture due to department event"
+              className="flex-1 text-xs px-2.5 py-1 bg-white border border-[#D8CEBA] rounded-md text-[#22252A] focus:outline-none focus:ring-1 focus:ring-[#244B3B]"
             />
           </div>
         </div>
 
-        {/* Step 2: Interactive Timetable Comparison Matrix */}
+        {/* Step 2: Interactive Matrix */}
         <div className="space-y-2">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-1 border-b border-slate-200 dark:border-slate-800">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-1 border-b border-[#E2D5B8]">
             <div>
-              <h4 className="text-sm font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
-                <Calendar className="w-4 h-4 text-blue-600" />
+              <h4 className="text-sm font-bold text-[#22252A] flex items-center gap-2">
+                <Calendar className="w-4 h-4 text-[#244B3B]" />
                 <span>
-                  Weekly Matrix for {selectedDivision?.academicYear} {selectedDivision?.name} vs. Your Availability
+                  {selectedDivision?.academicYear} {selectedDivision?.name} Timetable vs. Your Availability
                 </span>
               </h4>
-              <p className="text-xs text-slate-500 dark:text-slate-400">
-                Green slots indicate conflict-free time windows where both your schedule and the students' schedule are free.
+              <p className="text-xs text-[#535965]">
+                Green cells indicate free slots where neither the students nor you have conflicting sessions.
               </p>
             </div>
 
             {/* Legend */}
-            <div className="flex flex-wrap items-center gap-2 text-[10px] font-medium">
-              <span className="flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-700 font-semibold">
-                <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
+            <div className="flex flex-wrap items-center gap-2 text-[10px] font-bold">
+              <span className="flex items-center gap-1 px-2 py-0.5 rounded-full bg-[#EDF3F0] text-[#244B3B] border border-[#244B3B]/30">
+                <span className="w-2 h-2 rounded-full bg-[#244B3B]"></span>
                 Available Slot
               </span>
-              <span className="flex items-center gap-1 px-2 py-0.5 rounded-full bg-amber-50 dark:bg-amber-950/60 text-amber-900 dark:text-amber-300 border border-amber-300 dark:border-amber-700">
-                <span className="w-2 h-2 rounded-full bg-amber-500"></span>
+              <span className="flex items-center gap-1 px-2 py-0.5 rounded-full bg-[#FDF3EF] text-[#C66A4A] border border-[#C66A4A]/30">
+                <span className="w-2 h-2 rounded-full bg-[#C66A4A]"></span>
                 You're Unavailable
               </span>
-              <span className="flex items-center gap-1 px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-300 dark:border-slate-700">
-                <span className="w-2 h-2 rounded-full bg-slate-400"></span>
+              <span className="flex items-center gap-1 px-2 py-0.5 rounded-full bg-[#F6F1E8] text-[#535965] border border-[#E2D5B8]">
+                <span className="w-2 h-2 rounded-full bg-[#D8CEBA]"></span>
                 Class Has Lecture
               </span>
             </div>
           </div>
 
-          {/* Timetable Table Grid */}
-          <div className="overflow-x-auto rounded-xl border border-slate-200 dark:border-slate-800 shadow-xs">
+          {/* Table Grid */}
+          <div className="overflow-x-auto rounded-xl border border-[#E2D5B8] shadow-xs">
             <table className="w-full text-left text-xs border-collapse">
               <thead>
-                <tr className="bg-slate-100 dark:bg-slate-800/80 text-slate-700 dark:text-slate-300 border-b border-slate-200 dark:border-slate-700">
+                <tr className="bg-[#F6F1E8] text-[#22252A] border-b border-[#E2D5B8]">
                   <th className="p-2.5 font-bold text-center w-24">Day</th>
                   {timeSlots.map(slot => (
-                    <th key={slot.slotIndex} className="p-2.5 font-semibold text-center border-l border-slate-200 dark:border-slate-700 min-w-[130px]">
-                      <div className="font-bold text-slate-900 dark:text-slate-100">P{slot.slotIndex + 1}</div>
-                      <div className="text-[10px] font-mono text-slate-500">{slot.label}</div>
+                    <th key={slot.slotIndex} className="p-2.5 font-semibold text-center border-l border-[#E2D5B8] min-w-[130px]">
+                      <div className="font-bold text-[#22252A]">P{slot.slotIndex + 1}</div>
+                      <div className="text-[10px] font-mono text-[#535965]">{slot.label}</div>
                     </th>
                   ))}
                 </tr>
               </thead>
               <tbody>
                 {workingDays.map(day => (
-                  <tr key={day} className="border-b border-slate-100 dark:border-slate-800 hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors">
-                    <td className="p-2.5 font-bold text-slate-800 dark:text-slate-200 bg-slate-50/50 dark:bg-slate-800/40 text-center">
+                  <tr key={day} className="border-b border-[#E2D5B8] hover:bg-[#F6F1E8]/40 transition-colors">
+                    <td className="p-2.5 font-bold text-[#22252A] bg-[#F6F1E8]/70 text-center">
                       {day}
                     </td>
                     {timeSlots.map(slot => {
@@ -466,10 +450,10 @@ export const ScheduleClassModal: React.FC<ScheduleClassModalProps> = ({
                           <td
                             key={slot.slotIndex}
                             onClick={() => setSelectedSlot({ day, slotIndex: slot.slotIndex })}
-                            className={`p-2 border-l border-slate-100 dark:border-slate-800 text-center cursor-pointer transition-all ${
+                            className={`p-2 border-l border-[#E2D5B8] text-center cursor-pointer transition-all ${
                               isSelected
-                                ? 'bg-blue-600 text-white ring-2 ring-blue-600 font-bold shadow-md'
-                                : 'bg-emerald-50/60 dark:bg-emerald-950/20 hover:bg-emerald-100 dark:hover:bg-emerald-900/40 text-emerald-900 dark:text-emerald-200'
+                                ? 'bg-[#244B3B] text-white font-bold ring-2 ring-[#244B3B]'
+                                : 'bg-[#EDF3F0] hover:bg-[#244B3B]/20 text-[#244B3B]'
                             }`}
                           >
                             <div className="flex flex-col items-center justify-center py-1">
@@ -481,11 +465,10 @@ export const ScheduleClassModal: React.FC<ScheduleClassModalProps> = ({
                                 </>
                               ) : (
                                 <>
-                                  <Sparkles className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 mb-0.5" />
-                                  <span className="font-bold text-[11px] text-emerald-800 dark:text-emerald-300">
+                                  <span className="font-bold text-[11px] text-[#244B3B]">
                                     Click to Book
                                   </span>
-                                  <span className="text-[9px] text-emerald-700/80 dark:text-emerald-400">
+                                  <span className="text-[9px] text-[#244B3B]/80 font-medium">
                                     Both Free
                                   </span>
                                 </>
@@ -500,13 +483,13 @@ export const ScheduleClassModal: React.FC<ScheduleClassModalProps> = ({
                           <td
                             key={slot.slotIndex}
                             title={evalResult.description}
-                            className="p-2 border-l border-slate-100 dark:border-slate-800 bg-amber-50/70 dark:bg-amber-950/30 text-amber-900 dark:text-amber-200 opacity-90"
+                            className="p-2 border-l border-[#E2D5B8] bg-[#FDF3EF] text-[#C66A4A]"
                           >
                             <div className="flex flex-col items-center text-center">
-                              <span className="px-1.5 py-0.5 rounded text-[10px] font-bold bg-amber-200/80 dark:bg-amber-900/60 text-amber-950 dark:text-amber-200 mb-0.5">
+                              <span className="px-1.5 py-0.5 rounded text-[10px] font-bold bg-[#C66A4A] text-white mb-0.5">
                                 You're Unavailable
                               </span>
-                              <span className="text-[10px] text-amber-800 dark:text-amber-300 truncate max-w-[120px]">
+                              <span className="text-[10px] text-[#A95437] truncate max-w-[120px] font-semibold">
                                 {evalResult.profAssignment?.subjectCode} in {evalResult.profAssignment?.divisionName}
                               </span>
                             </div>
@@ -519,13 +502,13 @@ export const ScheduleClassModal: React.FC<ScheduleClassModalProps> = ({
                           <td
                             key={slot.slotIndex}
                             title={evalResult.description}
-                            className="p-2 border-l border-slate-100 dark:border-slate-800 bg-slate-100 dark:bg-slate-800/60 text-slate-600 dark:text-slate-400"
+                            className="p-2 border-l border-[#E2D5B8] bg-[#F6F1E8] text-[#535965]"
                           >
                             <div className="flex flex-col items-center text-center">
-                              <span className="text-[10px] font-semibold text-slate-700 dark:text-slate-300">
+                              <span className="text-[10px] font-bold text-[#22252A]">
                                 Both Occupied
                               </span>
-                              <span className="text-[9px] text-slate-500">
+                              <span className="text-[9px] text-[#535965]">
                                 {evalResult.classAssignment?.subjectCode}
                               </span>
                             </div>
@@ -538,11 +521,11 @@ export const ScheduleClassModal: React.FC<ScheduleClassModalProps> = ({
                           <td
                             key={slot.slotIndex}
                             title={evalResult.description}
-                            className="p-2 border-l border-slate-100 dark:border-slate-800 bg-rose-50/50 dark:bg-rose-950/20 text-rose-800 dark:text-rose-300"
+                            className="p-2 border-l border-[#E2D5B8] bg-[#FDF3EF] text-[#C66A4A]"
                           >
                             <div className="flex flex-col items-center text-center">
-                              <span className="text-[10px] font-semibold">Room Busy</span>
-                              <span className="text-[9px] text-rose-700">{evalResult.roomAssignment?.divisionName}</span>
+                              <span className="text-[10px] font-bold">Room Booked</span>
+                              <span className="text-[9px] text-[#A95437]">{evalResult.roomAssignment?.divisionName}</span>
                             </div>
                           </td>
                         );
@@ -553,13 +536,13 @@ export const ScheduleClassModal: React.FC<ScheduleClassModalProps> = ({
                         <td
                           key={slot.slotIndex}
                           title={evalResult.description}
-                          className="p-2 border-l border-slate-100 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/40 text-slate-700 dark:text-slate-300"
+                          className="p-2 border-l border-[#E2D5B8] bg-white text-[#22252A]"
                         >
                           <div className="flex flex-col items-center text-center">
                             <span className="font-semibold text-[11px] truncate max-w-[120px]">
                               {evalResult.label}
                             </span>
-                            <span className="text-[9px] text-slate-500 truncate max-w-[120px]">
+                            <span className="text-[9px] text-[#535965] truncate max-w-[120px]">
                               {evalResult.classAssignment?.roomNumber}
                             </span>
                           </div>
@@ -573,23 +556,23 @@ export const ScheduleClassModal: React.FC<ScheduleClassModalProps> = ({
           </div>
         </div>
 
-        {/* Selected Slot Summary Card & Actions */}
+        {/* Selected Slot Summary Card */}
         {selectedSlot ? (
-          <div className="p-4 rounded-xl bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-950/40 dark:to-indigo-950/40 border border-blue-200 dark:border-blue-800 flex flex-col sm:flex-row sm:items-center justify-between gap-4 animate-in fade-in duration-200">
+          <div className="p-4 rounded-xl bg-[#EDF3F0] border border-[#244B3B]/30 flex flex-col sm:flex-row sm:items-center justify-between gap-4 animate-in fade-in">
             <div className="space-y-1">
               <div className="flex items-center gap-2">
-                <span className="text-xs font-bold uppercase tracking-wider text-blue-700 dark:text-blue-300">
+                <span className="text-xs font-bold uppercase tracking-wider text-[#244B3B]">
                   Confirmed Selection:
                 </span>
-                <span className="px-2 py-0.5 rounded-full text-xs font-bold bg-blue-600 text-white">
+                <span className="px-2 py-0.5 rounded-full text-xs font-bold bg-[#244B3B] text-white">
                   {selectedSlot.day} · Period {selectedSlot.slotIndex + 1}
                 </span>
               </div>
-              <p className="text-xs text-slate-700 dark:text-slate-300">
+              <p className="text-xs text-[#22252A]">
                 <strong>{selectedSubject.code} ({selectedSubject.name})</strong> for <strong>{selectedDivision?.name}</strong> in Room <strong>{rooms.find(r => r.id === selectedRoomId)?.roomNumber}</strong>.
               </p>
-              <p className="text-[11px] text-slate-500 dark:text-slate-400">
-                A high-priority notice will automatically be broadcasted to all {selectedDivision?.studentCount} students in this class.
+              <p className="text-[11px] text-[#535965]">
+                An official notice will be broadcasted to all {selectedDivision?.studentCount} students in this class.
               </p>
             </div>
 
@@ -597,23 +580,23 @@ export const ScheduleClassModal: React.FC<ScheduleClassModalProps> = ({
               <button
                 type="button"
                 onClick={() => setSelectedSlot(null)}
-                className="px-3 py-2 text-xs font-semibold rounded-lg border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                className="px-3 py-2 text-xs font-semibold rounded-lg border border-[#D8CEBA] text-[#535965] hover:bg-white transition-colors"
               >
                 Change Slot
               </button>
               <button
                 type="button"
                 onClick={handleConfirmSchedule}
-                className="px-4 py-2 text-xs font-bold rounded-lg bg-blue-600 hover:bg-blue-700 text-white shadow-md hover:shadow-lg transition-all flex items-center gap-2"
+                className="px-4 py-2 text-xs font-bold rounded-lg bg-[#244B3B] hover:bg-[#1A372B] text-white shadow-xs transition-colors flex items-center gap-2"
               >
-                <CheckCircle2 className="w-4 h-4" />
+                <CheckCircle2 className="w-4 h-4 text-[#E2D5B8]" />
                 <span>Confirm & Publish Lecture</span>
               </button>
             </div>
           </div>
         ) : (
-          <div className="p-3 rounded-lg border border-dashed border-slate-300 dark:border-slate-700 text-center text-xs text-slate-500">
-            Click on any green <span className="font-semibold text-emerald-700 dark:text-emerald-400">"Available Slot"</span> in the matrix above to select your preferred time.
+          <div className="p-3 rounded-lg border border-dashed border-[#D8CEBA] text-center text-xs text-[#535965]">
+            Click on any green <span className="font-bold text-[#244B3B]">"Available Slot"</span> in the matrix to book your session.
           </div>
         )}
       </div>

@@ -71,32 +71,33 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
     value2: f.maxWeeklyHours,
     label1: 'Assigned',
     label2: 'Quota',
-    color1: '#4F46E5',
+    color1: '#244B3B',
+    color2: '#E2D5B8',
   }));
 
   // Session Distribution Data (Theory vs Practical)
   const theoryCount = activeVersion?.assignments.filter(a => a.sessionType === 'Theory').length || 0;
   const practicalCount = activeVersion?.assignments.filter(a => a.sessionType === 'Practical').length || 0;
   const sessionData = [
-    { name: 'Theory Lectures', value: theoryCount, color: '#4F46E5' },
-    { name: 'Lab Practicals', value: practicalCount, color: '#10B981' },
+    { name: 'Theory Lectures', value: theoryCount, color: '#244B3B' },
+    { name: 'Lab Practicals', value: practicalCount, color: '#C66A4A' },
   ];
 
   return (
     <div className="p-4 sm:p-6 max-w-7xl mx-auto space-y-6">
       {/* College Banner & Admin Actions */}
-      <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-5 sm:p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 shadow-xs">
+      <div className="bg-white rounded-xl border border-[#E2D5B8] p-5 sm:p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 shadow-xs">
         <div>
-          <div className="flex items-center gap-2 text-xs font-medium text-indigo-600 dark:text-indigo-400 mb-1">
+          <div className="flex items-center gap-2 text-xs font-medium text-[#244B3B] mb-1">
             <Building2 className="w-4 h-4" />
             <span>Sardar Patel Institute of Technology & Engineering</span>
             <span aria-hidden="true">•</span>
             <span>Odd Term 2026-27</span>
           </div>
-          <h1 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-slate-100 tracking-tight">
+          <h1 className="text-xl sm:text-2xl font-bold text-[#22252A] tracking-tight">
             Institutional Administration Command Center
           </h1>
-          <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mt-1">
+          <p className="text-xs sm:text-sm text-[#535965] mt-1">
             Centralized governance of multi-department academic timetables, faculty assignments, and students.
           </p>
         </div>
@@ -104,25 +105,25 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
         <div className="flex flex-wrap items-center gap-2.5">
           <button
             onClick={() => onNavigate('admin_repair')}
-            className="px-3.5 py-2 text-xs font-semibold text-amber-900 dark:text-amber-200 bg-amber-50 dark:bg-amber-950/40 hover:bg-amber-100 dark:hover:bg-amber-900/40 border border-amber-200 dark:border-amber-800 rounded-xl transition-colors flex items-center gap-1.5"
+            className="px-3.5 py-2 text-xs font-bold text-[#C66A4A] bg-[#FDF3EF] hover:bg-[#C66A4A]/20 border border-[#C66A4A]/30 rounded-xl transition-colors flex items-center gap-1.5"
           >
-            <Wrench className="w-3.5 h-3.5 text-amber-600" />
+            <Wrench className="w-3.5 h-3.5" />
             <span>Emergency Repair</span>
           </button>
           <button
             onClick={() => onNavigate('admin_generator')}
-            className="px-4 py-2 text-xs font-semibold text-white bg-indigo-600 hover:bg-indigo-700 rounded-xl shadow-xs transition-colors flex items-center gap-1.5"
+            className="px-4 py-2 text-xs font-bold text-white bg-[#244B3B] hover:bg-[#1A372B] rounded-xl shadow-xs transition-colors flex items-center gap-1.5"
           >
-            <Cpu className="w-4 h-4" />
+            <Cpu className="w-4 h-4 text-[#E2D5B8]" />
             <span>Generate Timetable</span>
           </button>
           {activeVersion && (
             <button
               onClick={() => exportMasterTimetableCsv(activeVersion)}
-              className="px-3.5 py-2 text-xs font-medium text-slate-700 dark:text-slate-200 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 rounded-xl transition-colors flex items-center gap-1.5"
+              className="px-3.5 py-2 text-xs font-semibold text-[#22252A] bg-[#F6F1E8] hover:bg-[#E2D5B8]/40 border border-[#E2D5B8] rounded-xl transition-colors flex items-center gap-1.5"
               title="Download Master CSV"
             >
-              <Download className="w-3.5 h-3.5" />
+              <Download className="w-3.5 h-3.5 text-[#535965]" />
               <span>Export Master</span>
             </button>
           )}

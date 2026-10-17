@@ -385,7 +385,7 @@ const AppContent: React.FC = () => {
   }
 
   return (
-    <div className="flex h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 overflow-hidden font-sans transition-colors">
+    <div className="flex h-screen bg-[#F6F1E8] text-[#22252A] overflow-hidden font-sans transition-colors">
       {/* Role-Aware Sidebar */}
       <Sidebar
         currentTab={currentTab}

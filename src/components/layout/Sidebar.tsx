@@ -16,7 +16,6 @@ import {
   ChevronLeft,
   ChevronRight,
   UserCheck,
-  Search,
   Compass,
   Building,
   Clock,
@@ -92,39 +91,39 @@ export const Sidebar: React.FC<SidebarProps> = ({
   const adminNavItems: NavItemDef[] = [
     { key: 'admin_dashboard', label: 'Admin Overview', icon: LayoutDashboard },
     { key: 'timetable', label: 'Master Timetable Grid', icon: CalendarRange },
-    { key: 'admin_generator', label: 'AI Constraint Generator', icon: Cpu },
+    { key: 'admin_generator', label: 'Constraint Generator', icon: Cpu },
     { key: 'admin_repair', label: 'Emergency Rescheduler', icon: Wrench, highlight: true },
     { key: 'admin_diagnostics', label: 'Conflict Diagnostics', icon: AlertTriangle, badge: diagnosticCount, badgeType: 'danger' },
-    { key: 'admin_teachers', label: 'Faculty Directory & Quota', icon: GraduationCap },
-    { key: 'admin_students', label: 'Student Cohorts & Batches', icon: Users },
+    { key: 'admin_teachers', label: 'Faculty & Workload', icon: GraduationCap },
+    { key: 'admin_students', label: 'Students & Batches', icon: Users },
     { key: 'admin_courses', label: 'Curriculum & Courses', icon: BookOpen },
-    { key: 'admin_rooms', label: 'Facilities & Labs', icon: DoorOpen },
+    { key: 'admin_rooms', label: 'Classrooms & Labs', icon: DoorOpen },
     { key: 'admin_availability', label: 'Availability Matrix', icon: CalendarCheck },
-    { key: 'admin_reports', label: 'Analytics & Export Reports', icon: BarChart3 },
+    { key: 'admin_reports', label: 'Analytics & Reports', icon: BarChart3 },
     { key: 'admin_announcements', label: 'Campus Notices', icon: Bell },
-    { key: 'admin_settings', label: 'System Configuration', icon: Settings },
+    { key: 'admin_settings', label: 'College Settings', icon: Settings },
   ];
 
   const teacherNavItems: NavItemDef[] = [
-    { key: 'teacher_dashboard', label: 'Teaching Schedule', icon: Clock },
+    { key: 'teacher_dashboard', label: 'My Teaching Schedule', icon: Clock },
     { key: 'teacher_schedule_class', label: 'Schedule a Class', icon: CalendarPlus, highlight: true, isAction: true },
     { key: 'teacher_timetable', label: 'Institutional Timetable', icon: CalendarRange },
     {
       key: 'teacher_substitutions',
-      label: 'Proxy & Substitution Hub',
+      label: 'Proxy & Substitutions',
       icon: UserCheck,
       badge: pendingSubstitutionsCount > 0 ? pendingSubstitutionsCount : undefined,
       badgeType: 'warning',
     },
-    { key: 'teacher_availability', label: 'Slot Preferences Matrix', icon: CalendarCheck },
+    { key: 'teacher_availability', label: 'Slot Preferences', icon: CalendarCheck },
     { key: 'teacher_announcements', label: 'Schedule Bulletins', icon: Bell },
   ];
 
   const studentNavItems: NavItemDef[] = [
-    { key: 'student_dashboard', label: 'Today’s Lecture Feed', icon: Clock },
+    { key: 'student_dashboard', label: 'Today’s Class Feed', icon: Clock },
     { key: 'student_timetable', label: 'Division Timetable', icon: CalendarRange },
-    { key: 'student_freerooms', label: 'Vacant Study Rooms & Labs', icon: Compass },
-    { key: 'student_faculty', label: 'Faculty Cabins & Directory', icon: Building },
+    { key: 'student_freerooms', label: 'Vacant Study Rooms', icon: Compass },
+    { key: 'student_faculty', label: 'Faculty Directory', icon: Building },
     { key: 'student_announcements', label: 'Timetable Notices', icon: Bell },
   ];
 
@@ -134,44 +133,44 @@ export const Sidebar: React.FC<SidebarProps> = ({
     student: studentNavItems,
   }[role || 'admin'];
 
-  // Distinct refined corporate roles palette: Deep Slate / Indigo, Ocean Azure, Warm Amber
+  // Palette: Forest Green (#244B3B), Terracotta (#C66A4A), Soft Sand (#E2D5B8), Warm Ivory (#F6F1E8)
   const roleTheme = {
     admin: {
-      activeBg: 'bg-indigo-50/80 dark:bg-indigo-950/50 text-indigo-950 dark:text-indigo-200 border-l-[3px] border-indigo-600 font-bold',
-      activeBadge: 'bg-indigo-600 text-white',
-      accentColor: 'text-indigo-600 dark:text-indigo-400',
+      activeBg: 'bg-[#EDF3F0] text-[#244B3B] border-l-[3px] border-[#244B3B] font-bold',
+      activeBadge: 'bg-[#244B3B] text-white',
+      accentColor: 'text-[#244B3B]',
       roleTitle: 'Administration Portal',
     },
     teacher: {
-      activeBg: 'bg-sky-50/80 dark:bg-sky-950/50 text-sky-950 dark:text-sky-200 border-l-[3px] border-sky-600 font-bold',
-      activeBadge: 'bg-sky-600 text-white',
-      accentColor: 'text-sky-600 dark:text-sky-400',
+      activeBg: 'bg-[#EDF3F0] text-[#244B3B] border-l-[3px] border-[#244B3B] font-bold',
+      activeBadge: 'bg-[#244B3B] text-white',
+      accentColor: 'text-[#244B3B]',
       roleTitle: 'Faculty Workspace',
     },
     student: {
-      activeBg: 'bg-amber-50/80 dark:bg-amber-950/50 text-amber-950 dark:text-amber-200 border-l-[3px] border-amber-600 font-bold',
-      activeBadge: 'bg-amber-600 text-white',
-      accentColor: 'text-amber-600 dark:text-amber-400',
+      activeBg: 'bg-[#FDF3EF] text-[#C66A4A] border-l-[3px] border-[#C66A4A] font-bold',
+      activeBadge: 'bg-[#C66A4A] text-white',
+      accentColor: 'text-[#C66A4A]',
       roleTitle: 'Student Portal',
     },
   }[role || 'admin'];
 
   const sidebarContent = (
-    <div className="flex flex-col h-full bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 border-r border-slate-200/80 dark:border-slate-800 shadow-xs">
+    <div className="flex flex-col h-full bg-white text-[#22252A] border-r border-[#E2D5B8] shadow-xs">
       {/* Brand & Workspace Indicator */}
-      <div className="px-4 py-3.5 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between bg-slate-50/60 dark:bg-slate-950/40">
+      <div className="px-4 py-3.5 border-b border-[#E2D5B8] flex items-center justify-between bg-[#F6F1E8]/70">
         {!collapsed && (
           <div className="flex flex-col">
-            <span className="text-[10px] uppercase tracking-wider text-slate-500 dark:text-slate-400 font-bold">
+            <span className="text-[10px] uppercase tracking-wider text-[#535965] font-bold">
               {roleTheme.roleTitle}
             </span>
-            <span className="text-xs font-extrabold text-slate-900 dark:text-white tracking-tight">
+            <span className="text-xs font-bold text-[#244B3B] tracking-tight">
               SPIT Timetable Engine
             </span>
           </div>
         )}
         {collapsed && (
-          <div className="w-8 h-8 rounded-lg bg-blue-600 text-white flex items-center justify-center font-bold text-xs mx-auto shadow-xs">
+          <div className="w-8 h-8 rounded-lg bg-[#244B3B] text-[#E2D5B8] flex items-center justify-center font-bold text-xs mx-auto shadow-xs">
             SS
           </div>
         )}
@@ -179,7 +178,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
         {/* Mobile close button */}
         <button
           onClick={onCloseMobile}
-          className="md:hidden text-slate-500 hover:text-slate-900 dark:hover:text-white p-1"
+          className="md:hidden text-[#535965] hover:text-[#22252A] p-1"
           aria-label="Close sidebar"
         >
           <X className="w-5 h-5" />
@@ -205,7 +204,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                   onCloseMobile();
                 }}
                 title={collapsed ? item.label : undefined}
-                className="w-full flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-bold transition-all text-left bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-xs hover:shadow-md hover:from-blue-700 hover:to-indigo-700 my-1.5"
+                className="w-full flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-bold transition-all text-left bg-[#C66A4A] hover:bg-[#A95437] text-white shadow-xs my-1.5"
               >
                 <Icon className="w-4 h-4 shrink-0 text-white" />
                 {!collapsed && (
@@ -231,10 +230,10 @@ export const Sidebar: React.FC<SidebarProps> = ({
               className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg text-xs transition-all text-left ${
                 isActive
                   ? roleTheme.activeBg
-                  : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100/70 dark:hover:bg-slate-800/60 hover:text-slate-900 dark:hover:text-slate-100 font-medium'
+                  : 'text-[#535965] hover:bg-[#F6F1E8] hover:text-[#22252A] font-medium'
               }`}
             >
-              <Icon className={`w-4 h-4 shrink-0 ${isActive ? roleTheme.accentColor : 'text-slate-400 dark:text-slate-500'}`} />
+              <Icon className={`w-4 h-4 shrink-0 ${isActive ? roleTheme.accentColor : 'text-[#535965]'}`} />
               {!collapsed && (
                 <span className="truncate flex-1">{item.label}</span>
               )}
@@ -244,10 +243,10 @@ export const Sidebar: React.FC<SidebarProps> = ({
                     isActive
                       ? roleTheme.activeBadge
                       : item.badgeType === 'danger'
-                      ? 'bg-rose-100 text-rose-700 dark:bg-rose-950 dark:text-rose-300 border border-rose-200 dark:border-rose-800'
+                      ? 'bg-[#FDF3EF] text-[#C66A4A] border border-[#C66A4A]/30'
                       : item.badgeType === 'warning'
-                      ? 'bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-300 border border-amber-200 dark:border-amber-800'
-                      : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300'
+                      ? 'bg-[#F6F1E8] text-[#535965] border border-[#E2D5B8]'
+                      : 'bg-[#F6F1E8] text-[#535965]'
                   }`}
                 >
                   {item.badge}
@@ -259,20 +258,20 @@ export const Sidebar: React.FC<SidebarProps> = ({
       </div>
 
       {/* User Info strip */}
-      <div className="p-3 border-t border-slate-100 dark:border-slate-800 bg-slate-50/70 dark:bg-slate-950/40">
+      <div className="p-3 border-t border-[#E2D5B8] bg-[#F6F1E8]/60">
         {!collapsed ? (
           <div className="flex items-center justify-between">
             <div className="truncate mr-2">
-              <div className="text-xs font-bold text-slate-900 dark:text-white truncate">
+              <div className="text-xs font-bold text-[#22252A] truncate">
                 {currentUser?.name || 'User'}
               </div>
-              <div className="text-[11px] text-slate-500 dark:text-slate-400 truncate">
+              <div className="text-[11px] text-[#535965] truncate">
                 {currentUser?.department || currentUser?.rollNumber || currentUser?.email}
               </div>
             </div>
             <button
               onClick={onToggleCollapse}
-              className="hidden md:flex p-1.5 text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-200/60 dark:hover:bg-slate-800 rounded-md transition-colors"
+              className="hidden md:flex p-1.5 text-[#535965] hover:text-[#22252A] hover:bg-[#E2D5B8]/40 rounded-md transition-colors"
               title="Collapse sidebar"
             >
               <ChevronLeft className="w-4 h-4" />
@@ -281,7 +280,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
         ) : (
           <button
             onClick={onToggleCollapse}
-            className="w-full flex justify-center p-1.5 text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-200/60 dark:hover:bg-slate-800 rounded-md transition-colors"
+            className="w-full flex justify-center p-1.5 text-[#535965] hover:text-[#22252A] hover:bg-[#E2D5B8]/40 rounded-md transition-colors"
             title="Expand sidebar"
           >
             <ChevronRight className="w-4 h-4" />
@@ -306,7 +305,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
       {mobileOpen && (
         <div
           onClick={onCloseMobile}
-          className="fixed inset-0 z-40 bg-slate-900/40 backdrop-blur-xs md:hidden"
+          className="fixed inset-0 z-40 bg-[#22252A]/40 backdrop-blur-xs md:hidden"
         />
       )}
 

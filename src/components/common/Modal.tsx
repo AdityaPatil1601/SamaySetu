@@ -42,25 +42,25 @@ export const Modal: React.FC<ModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs animate-in fade-in duration-150">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#22252A]/60 backdrop-blur-xs animate-in fade-in duration-150">
       <div
-        className={`bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-800 w-full ${maxWidthClasses[maxWidth]} max-h-[90vh] flex flex-col overflow-hidden animate-in zoom-in-95 duration-150`}
+        className={`bg-white rounded-2xl shadow-xl border border-[#E2D5B8] w-full ${maxWidthClasses[maxWidth]} max-h-[90vh] flex flex-col overflow-hidden animate-in zoom-in-95 duration-150`}
       >
-        <div className="p-4 sm:p-5 border-b border-slate-200 dark:border-slate-800 flex items-start justify-between gap-4 bg-slate-50/50 dark:bg-slate-800/40">
+        <div className="p-4 sm:p-5 border-b border-[#E2D5B8] flex items-start justify-between gap-4 bg-[#F6F1E8]">
           <div>
-            <h3 className="text-base font-bold text-slate-900 dark:text-slate-100">{title}</h3>
+            <h3 className="text-base font-bold text-[#22252A]">{title}</h3>
             {subtitle && (
-              <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">{subtitle}</p>
+              <p className="text-xs text-[#535965] mt-0.5">{subtitle}</p>
             )}
           </div>
           <button
             onClick={onClose}
-            className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 p-1 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+            className="text-[#535965] hover:text-[#22252A] p-1 rounded-lg hover:bg-[#E2D5B8]/40 transition-colors"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
-        <div className="p-4 sm:p-6 overflow-y-auto flex-1">{children}</div>
+        <div className="p-4 sm:p-6 overflow-y-auto flex-1 bg-white text-[#22252A]">{children}</div>
       </div>
     </div>
   );

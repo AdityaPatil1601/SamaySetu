@@ -116,36 +116,36 @@ export const StudentDashboard: React.FC<StudentDashboardProps> = ({
   return (
     <div className="p-4 sm:p-6 max-w-7xl mx-auto space-y-6">
       {/* Student Banner */}
-      <div className="bg-white border border-slate-200 rounded-xl p-5 sm:p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 shadow-xs">
+      <div className="bg-white border border-[#E2D5B8] rounded-xl p-5 sm:p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 shadow-xs">
         <div>
-          <div className="flex items-center gap-2 text-xs text-slate-500 mb-1">
-            <span className="font-semibold text-emerald-700">Student Academic Workspace</span>
+          <div className="flex items-center gap-2 text-xs text-[#535965] mb-1">
+            <span className="font-bold text-[#244B3B] uppercase tracking-wider text-[10px]">Student Academic Workspace</span>
             <span aria-hidden="true">·</span>
             <span>{currentDivision.academicYear} {currentDivision.name}</span>
             <span aria-hidden="true">·</span>
-            <span className="font-mono">{currentStudent.rollNumber}</span>
+            <span className="font-mono text-[#22252A] font-bold">{currentStudent.rollNumber}</span>
           </div>
-          <h1 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">
+          <h1 className="text-xl sm:text-2xl font-bold text-[#22252A] tracking-tight">
             Welcome, {currentStudent.name}
           </h1>
-          <p className="text-xs sm:text-sm text-slate-600 mt-1">
-            Assigned Lab Batch: <span className="font-bold text-amber-700">{currentStudent.batchName || 'A1'}</span> · {totalWeeklyHours} Hours of Scheduled Lectures & Practical Labs this week
+          <p className="text-xs sm:text-sm text-[#535965] mt-1">
+            Assigned Lab Batch: <span className="font-bold text-[#C66A4A]">{currentStudent.batchName || 'A1'}</span> · {totalWeeklyHours} Hours of Scheduled Lectures & Practical Labs this week
           </p>
         </div>
 
         <div className="flex flex-wrap items-center gap-2 shrink-0">
           <button
             onClick={handleDownloadClassPdf}
-            className="px-3 py-2 text-xs font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors flex items-center gap-1.5"
+            className="px-3 py-2 text-xs font-semibold text-[#22252A] bg-[#F6F1E8] hover:bg-[#E2D5B8]/40 border border-[#E2D5B8] rounded-lg transition-colors flex items-center gap-1.5"
           >
-            <Download className="w-3.5 h-3.5" />
+            <Download className="w-3.5 h-3.5 text-[#535965]" />
             <span>Download Timetable PDF</span>
           </button>
           <button
             onClick={() => onNavigate('student_freerooms')}
-            className="px-3 py-2 text-xs font-semibold text-white bg-emerald-600 hover:bg-emerald-700 rounded-lg transition-colors flex items-center gap-1.5 shadow-xs"
+            className="px-3 py-2 text-xs font-bold text-white bg-[#244B3B] hover:bg-[#1A372B] rounded-lg transition-colors flex items-center gap-1.5 shadow-xs"
           >
-            <Compass className="w-3.5 h-3.5" />
+            <Compass className="w-3.5 h-3.5 text-[#E2D5B8]" />
             <span>Find Free Room / Lab</span>
           </button>
         </div>
@@ -153,32 +153,32 @@ export const StudentDashboard: React.FC<StudentDashboardProps> = ({
 
       {/* Live Class Spotlight & Quick Stats */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div className="lg:col-span-2 bg-white border border-slate-200 rounded-xl p-5 sm:p-6 flex flex-col justify-between shadow-xs">
+        <div className="lg:col-span-2 bg-white border border-[#E2D5B8] rounded-xl p-5 sm:p-6 flex flex-col justify-between shadow-xs">
           <div>
-            <div className="flex items-center justify-between pb-3 border-b border-slate-100">
+            <div className="flex items-center justify-between pb-3 border-b border-[#E2D5B8]">
               <div className="flex items-center gap-2">
-                <Clock className="w-4 h-4 text-emerald-600" />
-                <span className="text-xs font-bold text-slate-900 uppercase tracking-wide">
+                <Clock className="w-4 h-4 text-[#244B3B]" />
+                <span className="text-xs font-bold text-[#22252A] uppercase tracking-wide">
                   Classroom Live Radar: {todayDayName}
                 </span>
               </div>
-              <span className="text-xs text-slate-500 font-mono">
+              <span className="text-xs text-[#535965] font-mono">
                 {todaysAssignments.length} session{todaysAssignments.length === 1 ? '' : 's'} today
               </span>
             </div>
 
             {liveLecture ? (
-              <div className="mt-4 p-4 rounded-xl bg-emerald-50/60 border border-emerald-200">
-                <div className="flex items-center justify-between text-xs font-bold text-emerald-900 mb-1">
+              <div className="mt-4 p-4 rounded-xl bg-[#EDF3F0] border border-[#244B3B]/30">
+                <div className="flex items-center justify-between text-xs font-bold text-[#244B3B] mb-1">
                   <span>UPCOMING / NEXT LECTURE</span>
-                  <span className="font-mono bg-emerald-100 px-2 py-0.5 rounded">{liveLecture.assignment.timeRange}</span>
+                  <span className="font-mono bg-white px-2 py-0.5 rounded border border-[#244B3B]/20">{liveLecture.assignment.timeRange}</span>
                 </div>
-                <h3 className="text-base sm:text-lg font-bold text-slate-900">
+                <h3 className="text-base sm:text-lg font-bold text-[#22252A]">
                   {liveLecture.assignment.subjectName}
                 </h3>
-                <div className="mt-2 flex flex-wrap items-center gap-3 text-xs text-slate-600">
-                  <span className="flex items-center gap-1 font-semibold text-slate-900">
-                    <DoorOpen className="w-3.5 h-3.5 text-emerald-700" />
+                <div className="mt-2 flex flex-wrap items-center gap-3 text-xs text-[#535965]">
+                  <span className="flex items-center gap-1 font-semibold text-[#22252A]">
+                    <DoorOpen className="w-3.5 h-3.5 text-[#244B3B]" />
                     <span>{liveLecture.assignment.roomNumber} ({liveLecture.assignment.roomName})</span>
                   </span>
                   <span aria-hidden="true">·</span>

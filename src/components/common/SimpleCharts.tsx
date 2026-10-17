@@ -85,13 +85,13 @@ export const ComparisonBarChart: React.FC<{
       </div>
 
       {/* Legend */}
-      <div className="flex items-center justify-center gap-4 text-[11px] text-slate-500 dark:text-slate-400">
+      <div className="flex items-center justify-center gap-4 text-[11px] text-[#535965]">
         <div className="flex items-center gap-1.5">
-          <span className="w-3 h-3 rounded-xs bg-indigo-600 inline-block" />
+          <span className="w-3 h-3 rounded-xs bg-[#244B3B] inline-block" />
           <span>Assigned Load (hrs)</span>
         </div>
         <div className="flex items-center gap-1.5">
-          <span className="w-3 h-3 rounded-xs bg-slate-200 dark:bg-slate-700 inline-block" />
+          <span className="w-3 h-3 rounded-xs bg-[#E2D5B8] inline-block" />
           <span>Max Allowed Quota</span>
         </div>
       </div>
