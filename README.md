@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # 🏛️ SamaySetu (समयसेतु)
 ### Autonomous Institutional Timetable Orchestration & Academic Operations Suite
 
@@ -133,3 +134,7 @@ You can switch roles with 1 click from the top-right switcher:
 ## 📄 License & Attribution
 Developed for the Institutional Academic Timetable Optimization Challenge.  
 © 2026-2027 Sardar Patel Institute of Technology & Engineering · SamaySetu Central Core.
+=======
+# SamaySetu
+Smart Campus Timetable Optimizer with conflict detection and management
+>>>>>>> origin/main
