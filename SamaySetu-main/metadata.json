@@ -1,0 +1,6 @@
+{
+  "name": "SamaySetu",
+  "description": "Role-based college timetable management and optimization system with Admin, Teacher, and Student portals, constraint-based scheduling, and PDF/Excel export.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

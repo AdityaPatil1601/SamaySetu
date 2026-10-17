@@ -1,0 +1,236 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    /* Bulbasaur Nature Theme Palette - Refined & Lightened */
+    --ivory-warm: #F4FAF7;
+    --forest-green: #1D5A4D;
+    --forest-dark: #16463C;
+    --forest-light: #35A799;
+    --forest-subtle: #EAF8F2;
+    --terracotta: #059669;
+    --terracotta-dark: #047857;
+    --terracotta-subtle: #EDFDF6;
+    --bulba-teal: #35A799;
+    --bulba-mint: #62D3A1;
+    --bulba-lime: #8DEEA4;
+    --bulba-sprout: #22C55E;
+    --bulba-flower: #FB7185;
+    --soft-sand: #D8EFE7;
+    --sand-subtle: #EDF9F4;
+    --charcoal: #1A382F;
+    --charcoal-muted: #456F62;
+    --charcoal-border: #CDECE0;
+    --font-heading: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+
+  body {
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    letter-spacing: -0.012em;
+    color: #143D32;
+    background-image: 
+      linear-gradient(to bottom, rgba(240, 253, 244, 0.38), rgba(232, 249, 239, 0.48)),
+      url('/images/bulbasaur-bg.jpg');
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  .font-mono {
+    font-family: 'JetBrains Mono', monospace;
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/* Bulbasaur Forest Wallpaper Background (Image 1) - Crystal Clear & Gentle */
+.bulba-forest-bg {
+  background-image: 
+    linear-gradient(to bottom, rgba(240, 253, 244, 0.38), rgba(232, 249, 239, 0.48)),
+    url('/images/bulbasaur-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+
+/* Palette utility classes (Bulbasaur Nature Theme) */
+.bg-ivory { background-color: #F4FAF7; }
+.bg-forest { background-color: #1D5A4D; }
+.bg-forest-light { background-color: #35A799; }
+.bg-forest-subtle { background-color: #EAF8F2; }
+.bg-terracotta { background-color: #059669; }
+.bg-terracotta-subtle { background-color: #EDFDF6; }
+.bg-sand { background-color: #D8EFE7; }
+.bg-sand-subtle { background-color: #EDF9F4; }
+.bg-bulba-teal { background-color: #35A799; }
+.bg-bulba-flower { background-color: #FB7185; }
+
+.text-forest { color: #1D5A4D; }
+.text-terracotta { color: #059669; }
+.text-bulba-teal { color: #35A799; }
+.text-bulba-flower { color: #E11D48; }
+.text-charcoal { color: #1A382F; }
+.text-charcoal-muted { color: #456F62; }
+
+.border-sand { border-color: #CCE8DD; }
+.border-sand-subtle { border-color: #E2F3EC; }
+.border-forest { border-color: #133E35; }
+.border-terracotta { border-color: #059669; }
+
+/* Bulbasaur Nature elevation & card containers */
+.academic-card {
+  background-color: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid #BCE5D1;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px -2px rgba(16, 78, 61, 0.06);
+}
+
+.academic-card-lift {
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease;
+}
+.academic-card-lift:hover {
+  transform: translateY(-2px);
+  border-color: #2A9D8F;
+  box-shadow: 0 10px 24px -4px rgba(19, 62, 53, 0.10);
+}
+
+/* Bulbasaur Nature-themed Leaf badges */
+.bulba-leaf-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.25rem 0.625rem;
+  border-radius: 9999px;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #ECFDF5 0%, #D1FAE5 100%);
+  color: #065F46;
+  border: 1px solid #A7F3D0;
+  box-shadow: 0 1px 2px rgba(5, 150, 105, 0.08);
+}
+
+/* Subtle botanical ambient background pattern */
+.nature-bg-pattern {
+  background-color: #F0F9F5;
+  background-image: radial-gradient(#2A9D8F 0.65px, transparent 0.65px), radial-gradient(#57CC99 0.65px, #F0F9F5 0.65px);
+  background-size: 26px 26px;
+  background-position: 0 0, 13px 13px;
+  background-opacity: 0.08;
+}
+
+/* Nature-themed timetable scrollbars */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F0F9F5;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #BCE2D4;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #2A9D8F;
+}
+
+/* Standard Bulbasaur Nature Palette - Complete Grey Eradication */
+@variant dark (&:where(.dark, .dark *));
+
+/* 1. Global table header styling - Fresh Mint, Crisp Dark Green text (Zero Grey) */
+thead tr,
+th,
+tr[class*="bg-slate-50"],
+tr[class*="bg-slate-800"] {
+  background-color: #E6FDF0 !important;
+  color: #133E35 !important;
+  border-color: #BCE5D1 !important;
+}
+
+/* 2. Global Card & Container backgrounds - Clean Frosted Ivory White */
+[class*="bg-slate-800"],
+[class*="bg-slate-900"],
+.dark\:bg-slate-900,
+.dark\:bg-slate-800 {
+  background-color: rgba(255, 255, 255, 0.95) !important;
+  color: #133E35 !important;
+  border-color: #BCE5D1 !important;
+}
+
+/* 3. Global Input, Filter & Search Box backgrounds - Soft Light Nature Tint */
+input[class*="bg-slate-"],
+select[class*="bg-slate-"],
+textarea[class*="bg-slate-"],
+[class*="bg-slate-50"],
+[class*="bg-slate-100"] {
+  background-color: #F8FCF9 !important;
+  border-color: #BCE5D1 !important;
+  color: #133E35 !important;
+}
+
+/* 4. Global Borders - Mint Green (Zero Muddy Grey Borders) */
+[class*="border-slate-"] {
+  border-color: #BCE5D1 !important;
+}
+
+/* 5. Global Text - Forest & Emerald (Zero Faded Dull Grey) */
+[class*="text-slate-400"],
+[class*="text-slate-500"],
+[class*="text-slate-600"] {
+  color: #2D6A4F !important;
+}
+
+[class*="text-slate-700"],
+[class*="text-slate-800"],
+[class*="text-slate-900"],
+.dark\:text-slate-100,
+.dark\:text-slate-200 {
+  color: #133E35 !important;
+}
+
+/* 6. Standardize Badges - Replace Muddy Dull Purples & Cyans with Nature Greens */
+[class*="bg-indigo-50"],
+[class*="bg-indigo-100"],
+[class*="bg-indigo-950"] {
+  background-color: #E6FDF0 !important;
+  border-color: #A7F3D0 !important;
+  color: #065F46 !important;
+}
+
+[class*="bg-sky-50"],
+[class*="bg-sky-100"],
+[class*="bg-sky-950"] {
+  background-color: #DCFCE7 !important;
+  border-color: #86EFAC !important;
+  color: #166534 !important;
+}
+
+/* 7. Action Buttons & Icons */
+button:hover [class*="text-slate-400"] {
+  color: #059669 !important;
+}
+
+/* 8. Critical Red Violations - Pure High-Contrast Red (Zero Muddy Brown) */
+.dark\:bg-rose-950\/30,
+.dark\:bg-rose-950\/60,
+.dark\:bg-rose-900,
+[class*="bg-rose-950"] {
+  background-color: #FEF2F2 !important;
+  border-color: #EF4444 !important;
+  color: #DC2626 !important;
+}
+.dark\:text-rose-200,
+.dark\:text-rose-300,
+[class*="text-rose-700"] {
+  color: #DC2626 !important;
+}
+
